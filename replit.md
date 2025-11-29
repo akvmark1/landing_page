@@ -72,6 +72,17 @@ Each team member has:
 - `npm run build` - Build for production
 
 ## Recent Changes
+
+### November 29, 2025
+- Updated header: AkashVahini logo now larger and bolder, navigation links with improved styling
+- Fixed team card overlap issue by reducing card height to 340px
+- Changed "Philosophy" to "Motto" on team member cards
+- Created new CircuitIcon for Purna (Hardware Lead) - electronic circuit design with animated connections
+- Added "Meet the Team" button with email (assist.akashvahini@gmail.com)
+- Added WhatsApp button with group link for community joining
+- Redesigned Startup Journey section with interactive timeline showing milestones (2023-2025)
+
+### Previous
 - Initial creation of premium 3D landing page
 - All 9 team members with interactive cards
 - Scroll-triggered GSAP animations
