@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useLocation } from 'wouter';
 
 const values = [
   {
@@ -51,6 +52,11 @@ const values = [
 export function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const [, setLocation] = useLocation();
+
+  const handleValueClick = () => {
+    setLocation('/coming-soon');
+  };
 
   return (
     <section
@@ -95,7 +101,8 @@ export function AboutSection() {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="group relative p-8 rounded-2xl glass-effect card-hover"
+              className="group relative p-8 rounded-2xl glass-effect card-hover cursor-pointer"
+              onClick={handleValueClick}
             >
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               

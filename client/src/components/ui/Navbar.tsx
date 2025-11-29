@@ -18,6 +18,7 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
+    { label: 'Main', href: '/coming-soon' },
     { label: 'About', href: '#about' },
     { label: 'Team', href: '#team' },
     { label: 'Contact', href: 'mailto:info@akashvahini.com' },

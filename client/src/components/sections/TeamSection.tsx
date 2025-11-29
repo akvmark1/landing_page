@@ -143,7 +143,7 @@ function TeamCard({ member, index, isInView, onClick }: TeamCardProps & { onClic
       onClick={onClick}
     >
       <div 
-        className={`relative h-[280px] rounded-2xl overflow-hidden glass-effect cursor-pointer smooth-hover ${
+        className={`relative isolate h-[280px] rounded-2xl overflow-hidden glass-effect cursor-pointer smooth-hover ${
           isHovered ? 'scale-105 -translate-y-3' : 'scale-100 translate-y-0'
         }`}
         style={{
@@ -187,7 +187,7 @@ function TeamCard({ member, index, isInView, onClick }: TeamCardProps & { onClic
           </div>
 
           <div
-            className="relative z-50 text-center transition-transform duration-300"
+            className="relative z-40 text-center transition-transform duration-300"
             style={{ transform: `translateY(${isHovered ? -12 : 0}px)` }}
           >
             <div
@@ -245,14 +245,14 @@ function TeamCard({ member, index, isInView, onClick }: TeamCardProps & { onClic
                 duration: 0.2,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              className="absolute bottom-3 left-3 right-3 z-30"
+              className="absolute bottom-2 left-3 right-3 z-30"
             >
-              <div className={`p-3 rounded-xl bg-gradient-to-br from-black/95 to-black/90 backdrop-blur-xl border border-cyan-500/50 shadow-2xl`}>
-                <div className="flex items-center gap-2 mb-1">
+              <div className={`p-2 rounded-lg bg-black/90 backdrop-blur-xl border border-cyan-500/40 shadow-xl`}>
+                <div className="flex items-center gap-2 mb-0.5">
                   <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${member.color} animate-pulse`} />
-                  <p className="text-xs text-cyan-400 tracking-wider uppercase font-semibold">Click to view profile</p>
+                  <p className="text-[10px] text-cyan-400 tracking-wider uppercase font-semibold">Click to view profile</p>
                 </div>
-                <p className="text-sm text-white/90 italic leading-relaxed">"{member.philosophy}"</p>
+                <p className="text-xs text-white/80 italic leading-snug">"{member.philosophy}"</p>
               </div>
             </motion.div>
           )}
