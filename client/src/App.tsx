@@ -3,6 +3,7 @@ import { Route, Switch } from 'wouter';
 import { LandingPage } from './components/LandingPage';
 import { TeamMemberPortfolio } from './pages/TeamMemberPortfolio';
 import { ComingSoon } from './pages/ComingSoon';
+import { PWAInstallPrompt } from './components/PWAInstallPrompt';
 import { useTheme } from './lib/stores/useTheme';
 
 function LoadingScreen() {
@@ -47,6 +48,7 @@ function App() {
           </div>
         </Route>
       </Switch>
+      <PWAInstallPrompt />
     </Suspense>
   );
 }
