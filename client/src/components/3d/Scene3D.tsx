@@ -1,7 +1,7 @@
 import React, { Suspense, useRef, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment, Stars, Float } from '@react-three/drei';
-import { EffectComposer, Bloom, ChromaticAberration, Vignette } from '@react-three/postprocessing';
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
 import * as THREE from 'three';
 import { ParticleField } from './ParticleField';
@@ -98,11 +98,14 @@ export function Scene3D() {
       <Canvas
         camera={{ position: [0, 0, 15], fov: 60 }}
         gl={{ 
-          antialias: true, 
+          antialias: false,
           alpha: true,
-          powerPreference: 'high-performance'
+          powerPreference: 'high-performance',
+          stencil: false,
+          depth: true
         }}
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
+        performance={{ min: 0.5 }}
       >
         <color attach="background" args={['#000000']} />
         
@@ -114,19 +117,19 @@ export function Scene3D() {
           <Stars
             radius={100}
             depth={50}
-            count={3000}
+            count={1500}
             factor={4}
             saturation={0}
             fade
-            speed={0.5}
+            speed={0.3}
           />
           
-          <ParticleField count={1500} spread={60} />
+          <ParticleField count={800} spread={60} />
           <FloatingOrbs />
           <GlowingRings />
           <WaveGrid />
           
-          <Float speed={1} rotationIntensity={0.2} floatIntensity={0.5}>
+          <Float speed={0.8} rotationIntensity={0.15} floatIntensity={0.4}>
             <mesh position={[0, 0, -20]}>
               <icosahedronGeometry args={[3, 1]} />
               <meshStandardMaterial
@@ -140,22 +143,16 @@ export function Scene3D() {
             </mesh>
           </Float>
           
-          <EffectComposer>
+          <EffectComposer multisampling={0}>
             <Bloom
-              intensity={0.5}
-              luminanceThreshold={0.2}
+              intensity={0.4}
+              luminanceThreshold={0.3}
               luminanceSmoothing={0.9}
               mipmapBlur
             />
-            <ChromaticAberration
-              blendFunction={BlendFunction.NORMAL}
-              offset={new THREE.Vector2(0.0005, 0.0005)}
-              radialModulation={false}
-              modulationOffset={0.15}
-            />
             <Vignette
               offset={0.3}
-              darkness={0.7}
+              darkness={0.6}
               blendFunction={BlendFunction.NORMAL}
             />
           </EffectComposer>

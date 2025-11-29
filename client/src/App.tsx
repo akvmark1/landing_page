@@ -1,5 +1,8 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
+import { Route, Switch } from 'wouter';
 import { LandingPage } from './components/LandingPage';
+import { TeamMemberPortfolio } from './pages/TeamMemberPortfolio';
+import { useTheme } from './lib/stores/useTheme';
 
 function LoadingScreen() {
   return (
@@ -18,9 +21,30 @@ function LoadingScreen() {
 }
 
 function App() {
+  const { theme, colors } = useTheme();
+
+  useEffect(() => {
+    document.body.style.backgroundColor = colors.background;
+    document.body.style.color = colors.text;
+  }, [theme, colors]);
+
   return (
     <Suspense fallback={<LoadingScreen />}>
-      <LandingPage />
+      <Switch>
+        <Route path="/" component={LandingPage} />
+        <Route path="/team/:id" component={TeamMemberPortfolio} />
+        <Route>
+          <div className="min-h-screen bg-black flex items-center justify-center">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold text-white mb-4">404</h1>
+              <p className="text-white/60 mb-6">Page not found</p>
+              <a href="/" className="text-cyan-400 hover:text-cyan-300">
+                Go back home
+              </a>
+            </div>
+          </div>
+        </Route>
+      </Switch>
     </Suspense>
   );
 }

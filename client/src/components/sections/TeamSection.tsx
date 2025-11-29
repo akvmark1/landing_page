@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'wouter';
 import {
   CompassIcon,
   NeuralNetworkIcon,
@@ -13,7 +14,7 @@ import {
   CircuitIcon
 } from '../icons/RoleIcons';
 
-interface TeamMember {
+export interface TeamMember {
   id: number;
   name: string;
   role: string;
@@ -123,158 +124,154 @@ interface TeamCardProps {
   isInView: boolean;
 }
 
-function TeamCard({ member, index, isInView }: TeamCardProps) {
+function TeamCard({ member, index, isInView, onClick }: TeamCardProps & { onClick: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="relative"
+      transition={{ 
+        duration: 0.5, 
+        delay: index * 0.08,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }}
+      className="relative gpu-accelerate"
       style={{ zIndex: isHovered ? 100 : 1 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
-      <motion.div 
-        className="relative h-[280px] rounded-2xl overflow-hidden glass-effect cursor-pointer"
-        animate={{ 
-          scale: isHovered ? 1.08 : 1,
-          y: isHovered ? -20 : 0,
-        }}
-        transition={{ 
-          type: "spring",
-          stiffness: 300,
-          damping: 20
-        }}
+      <div 
+        className={`relative h-[280px] rounded-2xl overflow-hidden glass-effect cursor-pointer smooth-hover ${
+          isHovered ? 'scale-105 -translate-y-3' : 'scale-100 translate-y-0'
+        }`}
         style={{
           boxShadow: isHovered 
-            ? `0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 40px rgba(6, 182, 212, 0.3)` 
-            : '0 0 0 rgba(0, 0, 0, 0)'
+            ? `0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 30px rgba(6, 182, 212, 0.25)` 
+            : '0 4px 20px rgba(0, 0, 0, 0.3)',
+          transform: `translateZ(0) ${isHovered ? 'scale(1.05) translateY(-12px)' : 'scale(1) translateY(0)'}`
         }}
       >
-        <motion.div 
-          className={`absolute inset-0 bg-gradient-to-br ${member.color}`}
-          animate={{ opacity: isHovered ? 0.15 : 0 }}
-          transition={{ duration: 0.3 }}
+        <div 
+          className={`absolute inset-0 bg-gradient-to-br ${member.color} transition-opacity duration-300`}
+          style={{ opacity: isHovered ? 0.15 : 0 }}
         />
         
-        <motion.div 
-          className={`absolute inset-0 border-2 rounded-2xl pointer-events-none`}
-          animate={{ 
-            borderColor: isHovered ? 'rgba(6, 182, 212, 0.5)' : 'rgba(255, 255, 255, 0.05)',
+        <div 
+          className={`absolute inset-0 border-2 rounded-2xl pointer-events-none transition-colors duration-300`}
+          style={{ 
+            borderColor: isHovered ? 'rgba(6, 182, 212, 0.5)' : 'rgba(255, 255, 255, 0.05)'
           }}
-          transition={{ duration: 0.3 }}
         />
         
         <div className="absolute inset-0 flex flex-col items-center justify-center p-5">
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            animate={{ 
-              scale: isHovered ? 1.5 : 1,
+          <div
+            className={`absolute inset-0 flex items-center justify-center transition-all duration-400`}
+            style={{ 
+              transform: `scale(${isHovered ? 1.4 : 1})`,
               opacity: isHovered ? 0.3 : 0.2
             }}
-            transition={{ duration: 0.4 }}
           >
             <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${member.color} blur-2xl`} />
-          </motion.div>
+          </div>
 
-          <motion.div
-            animate={{ 
-              opacity: isHovered ? 0.2 : 1, 
-              scale: isHovered ? 0.6 : 1, 
-              y: isHovered ? -10 : 0 
+          <div
+            className={`relative z-10 text-cyan-400 mb-3 transition-all duration-300`}
+            style={{ 
+              opacity: isHovered ? 0.3 : 1, 
+              transform: `scale(${isHovered ? 0.7 : 1}) translateY(${isHovered ? -8 : 0}px)`
             }}
-            transition={{ duration: 0.3 }}
-            className="relative z-10 text-cyan-400 mb-3"
           >
             {member.icon}
-          </motion.div>
+          </div>
 
-          <motion.div
-            animate={{ y: isHovered ? -15 : 0, scale: isHovered ? 0.95 : 1 }}
-            transition={{ duration: 0.3 }}
-            className="relative z-10 text-center"
+          <div
+            className="relative z-10 text-center transition-transform duration-300"
+            style={{ transform: `translateY(${isHovered ? -12 : 0}px)` }}
           >
-            <motion.div
-              className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center border border-white/10"
-              animate={{ 
-                scale: isHovered ? 0.85 : 1,
-                borderColor: isHovered ? 'rgba(6, 182, 212, 0.4)' : 'rgba(255, 255, 255, 0.1)'
+            <div
+              className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center transition-all duration-300"
+              style={{ 
+                transform: `scale(${isHovered ? 0.9 : 1})`,
+                borderColor: isHovered ? 'rgba(6, 182, 212, 0.4)' : 'rgba(255, 255, 255, 0.1)',
+                borderWidth: '1px',
+                borderStyle: 'solid'
               }}
-              transition={{ duration: 0.3 }}
             >
               <span className="text-xl font-bold gradient-text">
                 {member.name.charAt(0)}
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h3 
-              className="text-lg font-semibold text-white mb-1"
-              animate={{ color: isHovered ? '#22d3ee' : '#ffffff' }}
-              transition={{ duration: 0.3 }}
+            <h3 
+              className="text-lg font-semibold mb-1 transition-colors duration-300"
+              style={{ color: isHovered ? '#22d3ee' : '#ffffff' }}
             >
               {member.name}
-            </motion.h3>
+            </h3>
             
             <p className={`text-xs bg-gradient-to-r ${member.color} bg-clip-text text-transparent font-medium mb-1`}>
               {member.role}
             </p>
             
-            <motion.p 
-              className="text-xs text-white/40 leading-relaxed"
-              animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? -10 : 0 }}
-              transition={{ duration: 0.2 }}
+            <p 
+              className="text-xs text-white/40 leading-relaxed transition-all duration-200"
+              style={{ 
+                opacity: isHovered ? 0 : 1, 
+                transform: `translateY(${isHovered ? -8 : 0}px)`
+              }}
             >
               {member.responsibility}
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
         </div>
 
-        <motion.div 
-          className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${member.color}`}
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
-          style={{ transformOrigin: 'left' }}
+        <div 
+          className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${member.color} transition-transform duration-400`}
+          style={{ 
+            transform: `scaleX(${isHovered ? 1 : 0})`,
+            transformOrigin: 'left'
+          }}
         />
         
         <AnimatePresence>
           {isHovered && (
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
               transition={{ 
-                type: "spring",
-                stiffness: 400,
-                damping: 25,
-                delay: 0.1
+                duration: 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94]
               }}
               className="absolute bottom-3 left-3 right-3 z-30"
             >
               <div className={`p-3 rounded-xl bg-gradient-to-br from-black/95 to-black/90 backdrop-blur-xl border border-cyan-500/50 shadow-2xl`}>
                 <div className="flex items-center gap-2 mb-1">
-                  <motion.div 
-                    className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${member.color}`}
-                    animate={{ scale: [1, 1.3, 1] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  />
-                  <p className="text-xs text-cyan-400 tracking-wider uppercase font-semibold">Motto</p>
+                  <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${member.color} animate-pulse`} />
+                  <p className="text-xs text-cyan-400 tracking-wider uppercase font-semibold">Click to view profile</p>
                 </div>
                 <p className="text-sm text-white/90 italic leading-relaxed">"{member.philosophy}"</p>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
 
+export { teamMembers };
+
 export function TeamSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const [, setLocation] = useLocation();
+
+  const handleMemberClick = (memberId: number) => {
+    setLocation(`/team/${memberId}`);
+  };
 
   return (
     <section
@@ -291,7 +288,7 @@ export function TeamSection() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="text-center mb-16"
         >
           <span className="text-cyan-400 text-sm tracking-[0.3em] uppercase mb-4 block">
@@ -309,14 +306,20 @@ export function TeamSection() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="text-center text-xs text-cyan-400/60 tracking-[0.2em] uppercase mb-8"
           >
             Leadership
           </motion.p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {teamMembers.slice(0, 3).map((member, index) => (
-              <TeamCard key={member.id} member={member} index={index} isInView={isInView} />
+              <TeamCard 
+                key={member.id} 
+                member={member} 
+                index={index} 
+                isInView={isInView} 
+                onClick={() => handleMemberClick(member.id)}
+              />
             ))}
           </div>
         </div>
@@ -325,14 +328,20 @@ export function TeamSection() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="text-center text-xs text-blue-400/60 tracking-[0.2em] uppercase mb-8"
           >
             Core Engineering
           </motion.p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {teamMembers.slice(3, 6).map((member, index) => (
-              <TeamCard key={member.id} member={member} index={index + 3} isInView={isInView} />
+              <TeamCard 
+                key={member.id} 
+                member={member} 
+                index={index + 3} 
+                isInView={isInView}
+                onClick={() => handleMemberClick(member.id)}
+              />
             ))}
           </div>
         </div>
@@ -341,22 +350,28 @@ export function TeamSection() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             className="text-center text-xs text-purple-400/60 tracking-[0.2em] uppercase mb-8"
           >
             Operations & Creative
           </motion.p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {teamMembers.slice(6, 9).map((member, index) => (
-              <TeamCard key={member.id} member={member} index={index + 6} isInView={isInView} />
+              <TeamCard 
+                key={member.id} 
+                member={member} 
+                index={index + 6} 
+                isInView={isInView}
+                onClick={() => handleMemberClick(member.id)}
+              />
             ))}
           </div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-20 text-center"
         >
           <div className="inline-block px-8 py-4 rounded-full glass-effect border border-white/5">
