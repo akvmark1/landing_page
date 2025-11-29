@@ -73,14 +73,22 @@ Each team member has:
 
 ## Recent Changes
 
-### November 29, 2025
+### November 29, 2025 (Latest)
+- Fixed team card hover overlap: Motto panel now contained inside card (320px height, bottom-4 positioning)
+- Redesigned Journey section with GitHub-style timeline:
+  - Correct dates: Feb 2025 (founding) through Nov 2025 (current phase)
+  - Alternating left/right cards on desktop
+  - Contribution counts per milestone
+  - Active badge with pulsing animation for current phase
+  - Team avatars showing 9 members at bottom
+- Fixed mobile timeline alignment (dot at left-[24px], line at left-[31px])
+
+### November 29, 2025 (Earlier)
 - Updated header: AkashVahini logo now larger and bolder, navigation links with improved styling
-- Fixed team card overlap issue by reducing card height to 340px
 - Changed "Philosophy" to "Motto" on team member cards
 - Created new CircuitIcon for Purna (Hardware Lead) - electronic circuit design with animated connections
 - Added "Meet the Team" button with email (assist.akashvahini@gmail.com)
 - Added WhatsApp button with group link for community joining
-- Redesigned Startup Journey section with interactive timeline showing milestones (2023-2025)
 
 ### Previous
 - Initial creation of premium 3D landing page
