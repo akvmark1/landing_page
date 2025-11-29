@@ -241,3 +241,78 @@ export function CFOIcon({ className = '' }: IconProps) {
     </svg>
   );
 }
+
+export function CircuitIcon({ className = '' }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none">
+      <motion.rect x="20" y="20" width="8" height="8" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.3"
+        animate={{ scale: [1, 1.1, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+      <motion.line x1="24" y1="4" x2="24" y2="20" stroke="currentColor" strokeWidth="1.5"
+        animate={{ pathLength: [0, 1] }}
+        transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
+      />
+      <motion.line x1="24" y1="28" x2="24" y2="44" stroke="currentColor" strokeWidth="1.5"
+        animate={{ pathLength: [0, 1] }}
+        transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+      />
+      <motion.line x1="4" y1="24" x2="20" y2="24" stroke="currentColor" strokeWidth="1.5"
+        animate={{ pathLength: [0, 1] }}
+        transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
+      />
+      <motion.line x1="28" y1="24" x2="44" y2="24" stroke="currentColor" strokeWidth="1.5"
+        animate={{ pathLength: [0, 1] }}
+        transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
+      />
+      <motion.circle cx="24" cy="4" r="2" fill="currentColor"
+        animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 0 }}
+      />
+      <motion.circle cx="24" cy="44" r="2" fill="currentColor"
+        animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 0.3 }}
+      />
+      <motion.circle cx="4" cy="24" r="2" fill="currentColor"
+        animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 0.6 }}
+      />
+      <motion.circle cx="44" cy="24" r="2" fill="currentColor"
+        animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 0.9 }}
+      />
+      <motion.line x1="8" y1="8" x2="18" y2="18" stroke="currentColor" strokeWidth="1" opacity="0.5"
+        animate={{ pathLength: [0, 1] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 0.8 }}
+      />
+      <motion.line x1="40" y1="8" x2="30" y2="18" stroke="currentColor" strokeWidth="1" opacity="0.5"
+        animate={{ pathLength: [0, 1] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 1 }}
+      />
+      <motion.line x1="8" y1="40" x2="18" y2="30" stroke="currentColor" strokeWidth="1" opacity="0.5"
+        animate={{ pathLength: [0, 1] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 1.2 }}
+      />
+      <motion.line x1="40" y1="40" x2="30" y2="30" stroke="currentColor" strokeWidth="1" opacity="0.5"
+        animate={{ pathLength: [0, 1] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 1.4 }}
+      />
+      <motion.circle cx="8" cy="8" r="1.5" fill="currentColor" opacity="0.5"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 0.8 }}
+      />
+      <motion.circle cx="40" cy="8" r="1.5" fill="currentColor" opacity="0.5"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 1 }}
+      />
+      <motion.circle cx="8" cy="40" r="1.5" fill="currentColor" opacity="0.5"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 1.2 }}
+      />
+      <motion.circle cx="40" cy="40" r="1.5" fill="currentColor" opacity="0.5"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 1, repeat: Infinity, delay: 1.4 }}
+      />
+    </svg>
+  );
+}

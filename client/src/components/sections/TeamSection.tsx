@@ -9,7 +9,8 @@ import {
   TimelineIcon,
   CameraIcon,
   DocumentIcon,
-  CFOIcon
+  CFOIcon,
+  CircuitIcon
 } from '../icons/RoleIcons';
 
 interface TeamMember {
@@ -60,8 +61,8 @@ const teamMembers: TeamMember[] = [
     role: 'Hardware Lead',
     title: 'Head of Hardware Engineering',
     responsibility: 'Assembly, Integration, Flight Systems',
-    philosophy: 'Hardware is poetry, if you look closely.',
-    icon: <GearIcon className="w-12 h-12" />,
+    philosophy: 'Precision in every circuit, excellence in every connection.',
+    icon: <CircuitIcon className="w-12 h-12" />,
     color: 'from-orange-400 to-red-500',
   },
   {
@@ -134,7 +135,7 @@ function TeamCard({ member, index, isInView }: TeamCardProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative h-[380px] rounded-2xl overflow-hidden glass-effect card-hover cursor-pointer">
+      <div className="relative h-[340px] rounded-2xl overflow-hidden glass-effect card-hover cursor-pointer">
         <div className={`absolute inset-0 bg-gradient-to-br ${member.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
         
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 transition-all duration-500">
@@ -190,7 +191,7 @@ function TeamCard({ member, index, isInView }: TeamCardProps) {
                 className="absolute bottom-6 left-6 right-6 z-20"
               >
                 <div className="p-4 rounded-xl bg-black/60 backdrop-blur-lg border border-white/10">
-                  <p className="text-xs text-cyan-400 mb-1 tracking-wider uppercase">Philosophy</p>
+                  <p className="text-xs text-cyan-400 mb-1 tracking-wider uppercase">Motto</p>
                   <p className="text-sm text-white/80 italic">"{member.philosophy}"</p>
                 </div>
               </motion.div>

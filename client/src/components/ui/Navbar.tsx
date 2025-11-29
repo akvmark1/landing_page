@@ -35,17 +35,17 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <a href="#" className="flex items-center gap-2">
-              <span className="font-outfit text-xl font-bold gradient-text">
+              <span className="font-outfit text-2xl font-bold gradient-text">
                 AkashVahini
               </span>
             </a>
 
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-10">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-sm text-white/60 hover:text-cyan-400 transition-colors tracking-wide"
+                  className="text-sm text-white/70 hover:text-cyan-400 transition-colors tracking-wide font-medium"
                 >
                   {link.label}
                 </a>
