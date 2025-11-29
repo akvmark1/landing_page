@@ -187,7 +187,7 @@ function TeamCard({ member, index, isInView, onClick }: TeamCardProps & { onClic
           </div>
 
           <div
-            className="relative z-10 text-center transition-transform duration-300"
+            className="relative z-50 text-center transition-transform duration-300"
             style={{ transform: `translateY(${isHovered ? -12 : 0}px)` }}
           >
             <div
@@ -211,7 +211,7 @@ function TeamCard({ member, index, isInView, onClick }: TeamCardProps & { onClic
               {member.name}
             </h3>
             
-            <p className={`text-xs bg-gradient-to-r ${member.color} bg-clip-text text-transparent font-medium mb-1 relative z-40`}>
+            <p className={`text-xs bg-gradient-to-r ${member.color} bg-clip-text text-transparent font-medium mb-1`}>
               {member.role}
             </p>
             

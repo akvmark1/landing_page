@@ -2,6 +2,7 @@ import { Suspense, useEffect } from 'react';
 import { Route, Switch } from 'wouter';
 import { LandingPage } from './components/LandingPage';
 import { TeamMemberPortfolio } from './pages/TeamMemberPortfolio';
+import { ComingSoon } from './pages/ComingSoon';
 import { useTheme } from './lib/stores/useTheme';
 
 function LoadingScreen() {
@@ -32,6 +33,7 @@ function App() {
     <Suspense fallback={<LoadingScreen />}>
       <Switch>
         <Route path="/" component={LandingPage} />
+        <Route path="/coming-soon" component={ComingSoon} />
         <Route path="/team/:id" component={TeamMemberPortfolio} />
         <Route>
           <div className="min-h-screen bg-black flex items-center justify-center">
