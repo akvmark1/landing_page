@@ -211,7 +211,7 @@ function TeamCard({ member, index, isInView, onClick }: TeamCardProps & { onClic
               {member.name}
             </h3>
             
-            <p className={`text-xs bg-gradient-to-r ${member.color} bg-clip-text text-transparent font-medium mb-1`}>
+            <p className={`text-xs bg-gradient-to-r ${member.color} bg-clip-text text-transparent font-medium mb-1 relative z-40`}>
               {member.role}
             </p>
             
