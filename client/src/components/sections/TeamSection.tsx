@@ -131,11 +131,11 @@ function TeamCard({ member, index, isInView }: TeamCardProps) {
       initial={{ opacity: 0, y: 60 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group relative"
+      className={`group relative ${isHovered ? 'z-50' : 'z-10'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative h-[340px] rounded-2xl overflow-hidden glass-effect card-hover cursor-pointer">
+      <div className="relative h-[320px] rounded-2xl overflow-hidden glass-effect card-hover cursor-pointer">
         <div className={`absolute inset-0 bg-gradient-to-br ${member.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
         
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 transition-all duration-500">
@@ -181,25 +181,26 @@ function TeamCard({ member, index, isInView }: TeamCardProps) {
             </p>
           </motion.div>
 
-          <AnimatePresence>
-            {isHovered && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.3 }}
-                className="absolute bottom-6 left-6 right-6 z-20"
-              >
-                <div className="p-4 rounded-xl bg-black/60 backdrop-blur-lg border border-white/10">
-                  <p className="text-xs text-cyan-400 mb-1 tracking-wider uppercase">Motto</p>
-                  <p className="text-sm text-white/80 italic">"{member.philosophy}"</p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
 
         <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${member.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
+        
+        <AnimatePresence>
+          {isHovered && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute bottom-4 left-4 right-4 z-30"
+            >
+              <div className="p-3 rounded-xl bg-black/95 backdrop-blur-lg border border-cyan-500/40 shadow-xl">
+                <p className="text-xs text-cyan-400 mb-1 tracking-wider uppercase font-medium">Motto</p>
+                <p className="text-sm text-white/90 italic">"{member.philosophy}"</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   );
