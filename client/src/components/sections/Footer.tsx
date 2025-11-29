@@ -46,7 +46,7 @@ export function Footer() {
             </a>
             <span className="text-white/20">•</span>
             <a 
-              href="mailto:info@akashvahini.com" 
+              href="mailto:assist.akashvahini@gmail.com" 
               className="text-sm text-white/40 hover:text-cyan-400 transition-colors"
             >
               Contact
@@ -80,10 +80,10 @@ export function Footer() {
                 © {new Date().getFullYear()} AkashVahini. All rights reserved.
               </p>
               <a 
-                href="mailto:info@akashvahini.com"
+                href="mailto:assist.akashvahini@gmail.com"
                 className="text-xs text-white/30 hover:text-cyan-400 transition-colors"
               >
-                info@akashvahini.com
+                assist.akashvahini@gmail.com
               </a>
             </div>
           </motion.div>

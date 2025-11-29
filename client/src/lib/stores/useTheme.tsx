@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export type ThemeType = 'dark' | 'light' | 'cyberpunk' | 'ocean' | 'sunset' | 'forest';
+export type ThemeType = 'dark' | 'cyberpunk' | 'ocean' | 'sunset' | 'forest';
 
 interface ThemeColors {
   primary: string;
@@ -30,19 +30,6 @@ export const themes: Record<ThemeType, ThemeColors> = {
     border: 'rgba(255, 255, 255, 0.05)',
     glow: 'rgba(0, 212, 255, 0.3)',
     glowSecondary: 'rgba(0, 102, 255, 0.3)',
-  },
-  light: {
-    primary: '#0066ff',
-    secondary: '#00d4ff',
-    accent: '#0891b2',
-    background: '#f8fafc',
-    backgroundSecondary: '#ffffff',
-    text: '#0f172a',
-    textSecondary: 'rgba(15, 23, 42, 0.7)',
-    textMuted: 'rgba(15, 23, 42, 0.5)',
-    border: 'rgba(15, 23, 42, 0.1)',
-    glow: 'rgba(0, 102, 255, 0.2)',
-    glowSecondary: 'rgba(0, 212, 255, 0.2)',
   },
   cyberpunk: {
     primary: '#ff00ff',
@@ -100,7 +87,6 @@ export const themes: Record<ThemeType, ThemeColors> = {
 
 export const themeNames: Record<ThemeType, string> = {
   dark: 'Dark Mode',
-  light: 'Light Mode',
   cyberpunk: 'Cyberpunk',
   ocean: 'Ocean Blue',
   sunset: 'Sunset Orange',
@@ -148,11 +134,5 @@ function applyThemeToDOM(theme: ThemeType) {
   root.style.setProperty('--glow-cyan', `0 0 60px ${colors.glow}`);
   root.style.setProperty('--glow-blue', `0 0 60px ${colors.glowSecondary}`);
   
-  if (theme === 'light') {
-    root.classList.add('light-theme');
-    root.classList.remove('dark-theme');
-  } else {
-    root.classList.remove('light-theme');
-    root.classList.add('dark-theme');
-  }
+  root.classList.add('dark-theme');
 }

@@ -235,21 +235,24 @@ export function JourneySection() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="text-center mt-20"
         >
-          <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10">
+          <a 
+            href="#team"
+            className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] hover:border-cyan-500/30 transition-all duration-300 cursor-pointer group"
+          >
             <div className="flex -space-x-2">
               {['A', 'S', 'P', 'B'].map((letter, i) => (
-                <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center border-2 border-black text-xs font-bold text-white">
+                <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center border-2 border-black text-xs font-bold text-white group-hover:scale-110 transition-transform duration-300">
                   {letter}
                 </div>
               ))}
-              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border-2 border-black text-xs font-medium text-white/60">
+              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border-2 border-black text-xs font-medium text-white/60 group-hover:bg-white/20 transition-colors duration-300">
                 +5
               </div>
             </div>
-            <span className="text-sm text-white/60">
+            <span className="text-sm text-white/60 group-hover:text-white/80 transition-colors duration-300">
               <span className="text-cyan-400 font-semibold">9 members</span> building the future
             </span>
-          </div>
+          </a>
         </motion.div>
       </motion.div>
     </section>
