@@ -1,18 +1,19 @@
+
 {
   "version": 2,
   "buildCommand": "npx tsx script/build-vercel.ts",
   "outputDirectory": "dist/public",
   "framework": null,
-  "trailingSlash": false,
   "cleanUrls": true,
-  "rewrites": [
+  "trailingSlash": false,
+  "routes": [
     {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
