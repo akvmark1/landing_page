@@ -7,7 +7,8 @@ async function buildForVercel() {
   console.log("Building client for Vercel...");
   await viteBuild({
     build: {
-      outDir: "public"
+      outDir: "dist",
+      emptyOutDir: true
     }
   });
   
