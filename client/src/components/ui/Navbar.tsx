@@ -11,7 +11,7 @@ const colors = {
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +31,9 @@ export function Navbar() {
 
   const handleNavClick = (link: typeof navLinks[0]) => {
     setIsMobileMenuOpen(false);
+    if (link.isRoute) {
+      setLocation(link.href);
+    }
   };
 
   return (
@@ -60,14 +63,14 @@ export function Navbar() {
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
                 link.isRoute ? (
-                  <Link
+                  <button
                     key={link.label}
-                    href={link.href}
-                    className="text-sm hover:text-cyan-400 transition-colors duration-200 tracking-wide font-medium"
+                    onClick={() => handleNavClick(link)}
+                    className="text-sm hover:text-cyan-400 transition-colors duration-200 tracking-wide font-medium cursor-pointer"
                     style={{ color: colors.textSecondary }}
                   >
                     {link.label}
-                  </Link>
+                  </button>
                 ) : (
                   <a
                     key={link.label}
@@ -121,20 +124,16 @@ export function Navbar() {
               <div className="flex flex-col items-center gap-6">
                 {navLinks.map((link, index) => (
                   link.isRoute ? (
-                    <Link
+                    <motion.button
                       key={link.label}
-                      href={link.href}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
                       onClick={() => handleNavClick(link)}
+                      className="text-2xl text-white/80 hover:text-cyan-400 transition-colors cursor-pointer"
                     >
-                      <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: index * 0.1 }}
-                        className="text-2xl text-white/80 hover:text-cyan-400 transition-colors"
-                      >
-                        {link.label}
-                      </motion.span>
-                    </Link>
+                      {link.label}
+                    </motion.button>
                   ) : (
                     <motion.a
                       key={link.label}
