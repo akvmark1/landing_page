@@ -69,7 +69,25 @@ Each team member has:
 
 ## Development Commands
 - `npm run dev` - Start development server
-- `npm run build` - Build for production
+- `npm run build` - Build for production (Replit)
+- `npx tsx script/build-vercel.ts` - Build for Vercel deployment
+
+## Vercel Deployment
+The project is configured for Vercel deployment with:
+- **vercel.json** - Vercel configuration file
+- **api/** folder - Serverless API functions (health check endpoints)
+- **script/build-vercel.ts** - Vercel-specific build script
+- **.vercelignore** - Files to exclude from Vercel deployment
+
+### Deploying to Vercel:
+1. Connect your GitHub repository to Vercel
+2. Vercel will auto-detect the configuration from vercel.json
+3. Build command: `npx tsx script/build-vercel.ts`
+4. Output directory: `dist/public`
+
+### Environment Variables for Vercel:
+- `VITE_SUPABASE_URL` - Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` - Supabase anonymous key
 
 ## Recent Changes
 
