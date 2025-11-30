@@ -73,7 +73,15 @@ Each team member has:
 
 ## Recent Changes
 
-### November 29, 2025 (Latest)
+### November 30, 2025 (Latest)
+- Integrated Supabase for Coming Soon page email notifications:
+  - Added @supabase/supabase-js client library
+  - Created Supabase client utility (client/src/lib/supabase.ts)
+  - Updated ComingSoon page to save emails to notify_gmail table
+  - Added loading state and error handling for form submissions
+  - Environment variables: VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY
+
+### November 29, 2025
 - Fixed team card hover overlap: Motto panel now contained inside card (320px height, bottom-4 positioning)
 - Redesigned Journey section with GitHub-style timeline:
   - Correct dates: Feb 2025 (founding) through Nov 2025 (current phase)
