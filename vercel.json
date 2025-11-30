@@ -2,7 +2,7 @@
 {
   "version": 2,
   "buildCommand": "npx tsx script/build-vercel.ts",
-  "outputDirectory": "public",
+  "outputDirectory": "dist",
   "framework": null,
   "cleanUrls": true,
   "trailingSlash": false,
