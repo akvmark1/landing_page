@@ -5,7 +5,11 @@ async function buildForVercel() {
   await rm("dist", { recursive: true, force: true });
 
   console.log("Building client for Vercel...");
-  await viteBuild();
+  await viteBuild({
+    build: {
+      outDir: "dist/public"
+    }
+  });
   
   console.log("Vercel build complete!");
 }
