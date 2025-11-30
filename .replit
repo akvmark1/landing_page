@@ -46,3 +46,9 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[userenv]
+
+[userenv.shared]
+NEXT_PUBLIC_SUPABASE_URL = "https://fdplnpdvdxtvpkfsmhum.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZkcGxucGR2ZHh0dnBrZnNtaHVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0Mjg2MjMsImV4cCI6MjA4MDAwNDYyM30.iimlkTjwiBMCXgG2D3nug6AlcKpWTylrt3AaxMVEgOg"
