@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ThemeSelector } from './ThemeSelector';
-import { useTheme } from '../../lib/stores/useTheme';
+import { Link, useLocation } from 'wouter';
+
+const colors = {
+  background: '#000000',
+  textSecondary: 'rgba(255, 255, 255, 0.7)',
+  border: 'rgba(255, 255, 255, 0.05)',
+};
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { colors } = useTheme();
+  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,11 +23,15 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: 'Main', href: '/coming-soon' },
-    { label: 'About', href: '#about' },
-    { label: 'Team', href: '#team' },
-    { label: 'Contact', href: 'mailto:info@akashvahini.com' },
+    { label: 'Main', href: '/coming-soon', isRoute: true },
+    { label: 'About', href: '#about', isRoute: false },
+    { label: 'Team', href: '#team', isRoute: false },
+    { label: 'Contact', href: 'mailto:info@akashvahini.com', isRoute: false },
   ];
+
+  const handleNavClick = (link: typeof navLinks[0]) => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <>
@@ -42,28 +51,37 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            <a href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <span className="font-outfit text-2xl font-bold gradient-text">
                 AkashVahini
               </span>
-            </a>
+            </Link>
 
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm hover:text-cyan-400 transition-colors duration-200 tracking-wide font-medium"
-                  style={{ color: colors.textSecondary }}
-                >
-                  {link.label}
-                </a>
+                link.isRoute ? (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="text-sm hover:text-cyan-400 transition-colors duration-200 tracking-wide font-medium"
+                    style={{ color: colors.textSecondary }}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="text-sm hover:text-cyan-400 transition-colors duration-200 tracking-wide font-medium"
+                    style={{ color: colors.textSecondary }}
+                  >
+                    {link.label}
+                  </a>
+                )
               ))}
-              <ThemeSelector />
             </div>
 
             <div className="flex items-center gap-3 md:hidden">
-              <ThemeSelector />
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
@@ -102,17 +120,34 @@ export function Navbar() {
             <div className="relative pt-24 px-6">
               <div className="flex flex-col items-center gap-6">
                 {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-2xl text-white/80 hover:text-cyan-400 transition-colors"
-                  >
-                    {link.label}
-                  </motion.a>
+                  link.isRoute ? (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      onClick={() => handleNavClick(link)}
+                    >
+                      <motion.span
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        className="text-2xl text-white/80 hover:text-cyan-400 transition-colors"
+                      >
+                        {link.label}
+                      </motion.span>
+                    </Link>
+                  ) : (
+                    <motion.a
+                      key={link.label}
+                      href={link.href}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      onClick={() => handleNavClick(link)}
+                      className="text-2xl text-white/80 hover:text-cyan-400 transition-colors"
+                    >
+                      {link.label}
+                    </motion.a>
+                  )
                 ))}
               </div>
             </div>
