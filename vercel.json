@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "buildCommand": "npx tsx script/build-vercel.ts",
+  "outputDirectory": "dist/public",
+  "framework": null,
+  "trailingSlash": false,
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/:path((?!assets|fonts|geometries|icons|sounds|textures|manifest.json|sw.js).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "@vercel/node@3"
+    }
+  }
+}
