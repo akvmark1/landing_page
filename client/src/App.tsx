@@ -1,10 +1,10 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Route, Switch } from 'wouter';
 import { LandingPage } from './components/LandingPage';
 import { TeamMemberPortfolio } from './pages/TeamMemberPortfolio';
 import { ComingSoon } from './pages/ComingSoon';
 import { PWAInstallPrompt } from './components/PWAInstallPrompt';
-import { useTheme } from './lib/stores/useTheme';
+import { useTheme, themes } from './lib/stores/useTheme';
 
 function LoadingScreen() {
   return (
@@ -22,8 +22,9 @@ function LoadingScreen() {
   );
 }
 
-function App() {
-  const { theme, colors } = useTheme();
+function AppContent() {
+  const theme = useTheme((state) => state.theme);
+  const colors = useTheme((state) => state.colors);
 
   useEffect(() => {
     document.body.style.backgroundColor = colors.background;
@@ -51,6 +52,22 @@ function App() {
       <PWAInstallPrompt />
     </Suspense>
   );
+}
+
+function App() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    document.body.style.backgroundColor = themes.dark.background;
+    document.body.style.color = themes.dark.text;
+  }, []);
+
+  if (!mounted) {
+    return <LoadingScreen />;
+  }
+
+  return <AppContent />;
 }
 
 export default App;

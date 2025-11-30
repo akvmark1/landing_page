@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 export type ThemeType = 'dark' | 'cyberpunk' | 'ocean' | 'sunset' | 'forest';
 
@@ -99,28 +99,9 @@ interface ThemeState {
   setTheme: (theme: ThemeType) => void;
 }
 
-export const useTheme = create<ThemeState>()(
-  persist(
-    (set) => ({
-      theme: 'dark',
-      colors: themes.dark,
-      setTheme: (theme: ThemeType) => {
-        set({ theme, colors: themes[theme] });
-        applyThemeToDOM(theme);
-      },
-    }),
-    {
-      name: 'akashvahini-theme',
-      onRehydrateStorage: () => (state) => {
-        if (state) {
-          applyThemeToDOM(state.theme);
-        }
-      },
-    }
-  )
-);
-
 function applyThemeToDOM(theme: ThemeType) {
+  if (typeof document === 'undefined') return;
+  
   const colors = themes[theme];
   const root = document.documentElement;
   
@@ -135,4 +116,35 @@ function applyThemeToDOM(theme: ThemeType) {
   root.style.setProperty('--glow-blue', `0 0 60px ${colors.glowSecondary}`);
   
   root.classList.add('dark-theme');
+}
+
+export const useTheme = create<ThemeState>()(
+  persist(
+    (set) => ({
+      theme: 'dark',
+      colors: themes.dark,
+      setTheme: (theme: ThemeType) => {
+        set({ theme, colors: themes[theme] });
+        applyThemeToDOM(theme);
+      },
+    }),
+    {
+      name: 'akashvahini-theme',
+      storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          applyThemeToDOM(state.theme);
+        }
+      },
+    }
+  )
+);
+
+export function getThemeColors(): ThemeColors {
+  try {
+    const state = useTheme.getState();
+    return state.colors;
+  } catch {
+    return themes.dark;
+  }
 }
