@@ -4,7 +4,6 @@ import { LandingPage } from './components/LandingPage';
 import { TeamMemberPortfolio } from './pages/TeamMemberPortfolio';
 import { ComingSoon } from './pages/ComingSoon';
 import { PWAInstallPrompt } from './components/PWAInstallPrompt';
-import { useTheme, themes } from './lib/stores/useTheme';
 
 function LoadingScreen() {
   return (
@@ -22,14 +21,18 @@ function LoadingScreen() {
   );
 }
 
-function AppContent() {
-  const theme = useTheme((state) => state.theme);
-  const colors = useTheme((state) => state.colors);
+function App() {
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    document.body.style.backgroundColor = colors.background;
-    document.body.style.color = colors.text;
-  }, [theme, colors]);
+    document.body.style.backgroundColor = '#000000';
+    document.body.style.color = '#ffffff';
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Suspense fallback={<LoadingScreen />}>
@@ -52,22 +55,6 @@ function AppContent() {
       <PWAInstallPrompt />
     </Suspense>
   );
-}
-
-function App() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    document.body.style.backgroundColor = themes.dark.background;
-    document.body.style.color = themes.dark.text;
-  }, []);
-
-  if (!mounted) {
-    return <LoadingScreen />;
-  }
-
-  return <AppContent />;
 }
 
 export default App;
