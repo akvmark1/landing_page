@@ -1,0 +1,57 @@
+{
+  "name": "AkashVahini - Aerial Innovation",
+  "short_name": "AkashVahini",
+  "description": "A New Era of Aerial Innovation. Where Intelligence Meets the Sky. Next-generation aerospace innovation initiative.",
+  "start_url": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "any",
+  "background_color": "#000000",
+  "theme_color": "#06b6d4",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["business", "technology", "aerospace"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "About AkashVahini",
+      "short_name": "About",
+      "url": "/#about",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Meet the Team",
+      "short_name": "Team",
+      "url": "/#team",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": []
+}

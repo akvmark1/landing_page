@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Allow: /team
+Allow: /about
+Disallow: /admin
+Disallow: /api
+
+Sitemap: https://akashvahini.com/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+Allow: /team
+Allow: /about
+Disallow: /admin
+
+User-agent: Bingbot
+Allow: /
+Allow: /team
+Allow: /about
+Disallow: /admin
+
+# Crawl delay (in seconds)
+Crawl-delay: 1
